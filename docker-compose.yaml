@@ -1,0 +1,20 @@
+# Use root/example as user/password credentials
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8.1.0
+    container_name: mysql-casbin
+    restart: always
+    ports:
+      - ${MYSQL_PORT:-3306}:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-mysql@123}
+      MYSQL_DATABASE: casbin
+      MYSQL_USER: casbiner
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-mysql@123}
+    volumes:
+      - mysql_db:/var/lib/mysql
+
+volumes:
+  mysql_db:
